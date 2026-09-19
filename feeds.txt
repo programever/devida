@@ -1,0 +1,116 @@
+# DeViDa feed list. One feed per line:  <topic>  <url>
+# Lines starting with # are ignored. Iker can add or remove any line.
+# A feed that is dead or blocked is skipped for that run; it never stops the run.
+#
+# Topics, in order of importance (Iker, 2026-09-16):
+#   ai    the main focus, about half of every day
+#   web   second
+#   ts    second
+#   dev   developer tools and engineering: the rest
+#
+# EVERY topic looks back exactly 24 hours. Anything older is ignored. Iker asked
+# for this on 2026-09-16: he wants only what really happened since yesterday.
+# Change it in ~/alpha/.env with WINDOW_HOURS_AI, WINDOW_HOURS_WEB,
+# WINDOW_HOURS_TS, WINDOW_HOURS_DEV.
+#
+# Be warned: the official web and TypeScript blogs below post only a few times a
+# year. Measured 2026-09-16, web.dev was 110 days old and MDN was 93 days old.
+# With a 24 hour window they will hardly ever appear, and most days will be AI
+# and dev. Iker knows this and chose it anyway. They are kept so that a real
+# release is never missed on the day it happens.
+
+ai	https://hnrss.org/frontpage?points=100
+ai	https://techcrunch.com/category/artificial-intelligence/feed/
+ai	https://arstechnica.com/ai/feed/
+ai	https://openai.com/news/rss.xml
+ai	https://deepmind.google/blog/rss.xml
+ai	https://huggingface.co/blog/feed.xml
+ai	https://simonwillison.net/atom/everything/
+ai	https://www.technologyreview.com/topic/artificial-intelligence/feed/
+# The companies that actually ship AI things, and the tools you run yourself.
+# Added 2026-09-19, each one checked alive on that day.
+ai	https://blog.google/technology/ai/rss/
+ai	https://blog.google/products/gemini/rss/
+ai	https://mistral.ai/rss.xml
+ai	https://github.com/ollama/ollama/releases.atom
+ai	https://github.com/vllm-project/vllm/releases.atom
+ai	https://github.com/huggingface/transformers/releases.atom
+web	https://web.dev/static/blog/feed.xml
+web	https://developer.chrome.com/static/blog/feed.xml
+web	https://hacks.mozilla.org/feed/
+web	https://developer.mozilla.org/en-US/blog/rss.xml
+web	https://www.smashingmagazine.com/feed/
+web	https://css-tricks.com/feed/
+web	https://javascriptweekly.com/rss
+# Release feeds. These only ever say "a new version is out", which is exactly
+# what Iker asked for on 2026-09-19. React and Tailwind post a few times a year;
+# they are kept so a real release is caught on the day it happens.
+web	https://github.com/facebook/react/releases.atom
+web	https://github.com/vercel/next.js/releases.atom
+web	https://github.com/sveltejs/svelte/releases.atom
+web	https://github.com/vuejs/core/releases.atom
+web	https://github.com/tailwindlabs/tailwindcss/releases.atom
+ts	https://devblogs.microsoft.com/typescript/feed/
+ts	https://nodejs.org/en/feed/blog.xml
+ts	https://deno.com/feed
+ts	https://bun.sh/rss.xml
+ts	https://github.com/vitejs/vite/releases.atom
+ts	https://www.totaltypescript.com/rss.xml
+ts	https://effect.website/rss.xml
+ts	https://github.com/microsoft/TypeScript/releases.atom
+ts	https://github.com/denoland/deno/releases.atom
+ts	https://github.com/oven-sh/bun/releases.atom
+ts	https://github.com/biomejs/biome/releases.atom
+
+# --- dev: developer tools and engineering ---------------------------------
+# Every one of these was checked on 2026-09-16: alive, and posting recently.
+# lobste.rs is the busy one, about 20 stories a day. The rest are slower company
+# and engineering blogs that are worth catching on the day they post.
+dev	https://lobste.rs/rss
+dev	https://blog.jetbrains.com/feed/
+dev	https://github.blog/feed/
+dev	https://blog.cloudflare.com/rss/
+dev	https://stackoverflow.blog/feed/
+dev	https://martinfowler.com/feed.atom
+dev	https://newsletter.pragmaticengineer.com/feed
+dev	https://www.thoughtworks.com/rss/insights.xml
+dev	https://kubernetes.io/feed.xml
+dev	https://about.gitlab.com/atom.xml
+dev	https://www.docker.com/blog/feed/
+# Languages, databases and the tools developers open every day. Added
+# 2026-09-19, each one checked alive on that day.
+dev	https://blog.rust-lang.org/feed.xml
+dev	https://go.dev/blog/feed.atom
+dev	https://www.postgresql.org/news.rss
+dev	https://github.com/rust-lang/rust/releases.atom
+dev	https://github.com/golang/go/releases.atom
+dev	https://github.com/microsoft/vscode/releases.atom
+dev	https://github.com/neovim/neovim/releases.atom
+dev	https://github.com/zed-industries/zed/releases.atom
+dev	https://github.com/cli/cli/releases.atom
+dev	https://github.com/astral-sh/uv/releases.atom
+dev	https://github.com/astral-sh/ruff/releases.atom
+dev	https://github.com/redis/redis/releases.atom
+dev	https://github.com/grafana/grafana/releases.atom
+dev	https://github.com/pola-rs/polars/releases.atom
+dev	https://github.com/docker/compose/releases.atom
+
+# A GitHub ".../releases.atom" feed also carries every test build: v3.6.0-rc.9,
+# v16.4.0-canary.36, "nightly: ...". Those are dropped in pipeline/crawl.py, and
+# only for GitHub release feeds, because a company blog may honestly be titled
+# "Gemini 3.8 preview" and that is real news.
+#
+# Feeds looked at on 2026-09-19 and NOT added, with the reason:
+#   llama.cpp releases      ten builds a day, named b11046. Pure noise.
+#   NVIDIA deep learning    nothing in 30 days.
+#   helix editor            nothing in over a year.
+#   sqlite releases         only internal branch tags, not real releases.
+#   astro releases          one package of a big repo at a time, ten a month.
+#   ghostty releases        only a nightly build.
+#   langchain releases      ten small patch versions a month.
+# Anthropic, Meta AI and Mistral have no working news feed at their own address;
+# mistral.ai/rss.xml does work and is used. Do not re-add a dead one without
+# checking it first.
+#
+# Removed 2026-09-19: The Verge AI feed. On that day it gave 5 stories and not
+# one was about a new thing: a governor, Hollywood, a flood warning, an essay.
