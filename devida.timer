@@ -1,0 +1,14 @@
+[Unit]
+Description=DeViDa daily at 03:00 Vietnam time, retry at 04:00
+
+[Timer]
+# The box runs on UTC, so the timezone is named here. The 04:00 run reuses the
+# content the 03:00 run already wrote, so it costs almost nothing.
+OnCalendar=*-*-* 03:00:00 Asia/Ho_Chi_Minh
+OnCalendar=*-*-* 04:00:00 Asia/Ho_Chi_Minh
+Persistent=true
+AccuracySec=1min
+Unit=devida.service
+
+[Install]
+WantedBy=timers.target
